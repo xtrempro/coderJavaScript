@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Horas Extras</title>
+</head>
+<body>
+    <header>
+        <h1>Primera Entrega JavaScprit CoderHouse</h1>
+    </header>
+    <main>
+        <h2>Calculadora de horas extraordinarias</h2>
+        <h3>En mi trabajo existen turno de día y turnos de noche. Cuando uno realiza un turno extra, las horas realizadas se pagan según el siguiente horario:</h3>
+        <ul>
+            <li>07:00 a 21:00 = Horas extras pagadas al 125%</li>
+            <li>21:00 a 07:00 = Horas extras pagadas al 150%</li>
+            <li>Días festivos y fines de semana = Horas extras pagadas al 150%</li>
+        </ul>
+        <p>Los turnos de día son de 08:00 a 20:00 horas, mientras que los turnos de noche son de 20:00 a 08:00 horas.</p>
+        <h3>En mi trabajo son alrededor de 1200 colaboradores, por lo que generalmente se producen errores al calcular las horas extraordinarias de cada trabajador</h3>
+        <p>Mi intención es poder desarrollar una <span>calculadora de horas extraordinarias</span> que sirva para cotejar que el dinero recibido en la remuneración se corresponda con las horas efectivamente realizadas.</p>
+        <h3>Para los turnos de día se dan las siguientes 2 situaciones:</h3>
+        <ol>
+            <li>días sábado, domingo o festivo: se consideran <span>12 HHEE nocturnas</span></li>
+            <li>días de lunes a viernes: se consideran <span>12 HHEE diurnas</span></li>
+        </ol>
+        <h3>Para los turnos de noche se dan las siguientes 8 situaciones:</h3>
+        <ol>
+            <li>noche del sábado: se consideran <span>12 HHEE nocturnas</span></li>
+            <li>noche del viernes cuando es festivo: se consideran <span>12 HHEE nocturnas</span></li>
+            <li>noche de un festivo y día siguiente también festivo: se consideran <span>12 HHEE nocturnas</span></li>
+            <li>noche de un festivo y día siguiente hábil: se consideran <span>11 HHEE nocturnas y 1 HHEE diurna</span></li>
+            <li>noche de un domingo y día siguiente hábil: se consideran <span>11 HHEE nocturnas y 1 HHEE diurna</span></li>
+            <li>noche de un lunes a jueves y día siguiente festivo: se consideran <span>11 HHEE nocturnas y 1 HHEE diurna</span></li>
+            <li>noche del viernes si no es festivo: se consideran <span>11 HHEE nocturnas y 1 HHEE diurna</span></li>
+            <li>noche de lunes a jueves: se consideran <span>10 HHEE nocturnas y 2 HHEE diurnas</span>(cuando no hay festivos)</li>
+        </ol>
+
+        <h4>En esta primera entrega, presento un código bastante sencillo, sin embargo, mi objetivo es poder complejizarlo con algunas variables que aún hacen falta, además de robustecer el código para que el proyecto final adquiera una utilidad real automatizando gran parte del proceso</h4>
+    </main>
+    <footer>
+        <p>Alan Plaza Martínez</p>
+    </footer>
+    <script src="./js/javascript.js"></script>
+</body>
+</html>
