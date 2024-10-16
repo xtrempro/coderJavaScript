@@ -1,8 +1,9 @@
 /* Declaro el valor de una hora normal */
-const valorHoraNormal = 6000
+const valorHoraNormal = 1000
 /* variable de cuanto se debe pagar por horas extras */
 let aPagar = 0
 let montoTotal = 0
+let montoTurno = 0
 /* variable de si el turno es de día o de noche */
 let tipoTurno = prompt("escriba 'dia' o 'noche' de acuerdo al horario en el que realizó el turno extra").toLowerCase()
 let festivo
@@ -31,10 +32,14 @@ while (tipoTurno !== "listo") {
             festivo=prompt("Escriba 'si' en el caso que ese día haya sido festivo. Escriba 'no' en el caso que ese día no haya sido festivo").toLowerCase()
             if (festivo == "si" || diaSemana == "sabado" || diaSemana == "domingo"){
                 montoTotal += extraNocturna(12)
-                alert("El monto a pagar por el turno ingresado es de $" + aPagar)
+                montoTurno = extraNocturna(12)
+                alert("El monto a pagar por el turno ingresado es de $" + montoTurno)
+                alert("El monto calculado en el ejercicio anterior debería ser de $18.000")
             } else if (festivo == "no"){
                 montoTotal += extraDiurna(12)
-                alert("El monto a pagar por el turno ingresado es de $" + aPagar)
+                montoTurno = extraDiurna(12) + extraNocturna(0)
+                alert("El monto a pagar por el turno ingresado es de $" + montoTurno)
+                alert("El monto calculado en el ejercicio anterior debería ser de $15.000")
             } else {
                 alert("Los datos ingresados son erróneos, vuelva a intentar")
             }
@@ -42,7 +47,7 @@ while (tipoTurno !== "listo") {
             break
 
         /* para el turno de noche hay 9 opciones:
-            1.- noche del sábado: se consideran 12 HHEE nocturnas (listo)
+            1.- noche del sábado: se consideran 12 HHEE nocturnas ($18.000 cuando el valor de hora es de $1000)
             2.- noche del domingo con feriado al día siguiente: se consideran 12 HHEE nocturnas
             3.- noche del viernes cuando es festivo: se consideran 12 HHEE nocturnas (listo)
             4.- noche de un festivo y día siguiente también festivo: se consideran 12 HHEE nocturnas (listo)
@@ -60,18 +65,24 @@ while (tipoTurno !== "listo") {
             /* aqui resuelvo el caso 1, 2 y 3*/
             if (diaSemana == "sabado" || (festivo == "si" && festivoSiguiente == "si") || (festivo == "si" && diaSemana == "viernes") || (festivoSiguiente == "si" && diaSemana == "domingo")){
                 montoTotal += extraNocturna(12)
-                alert("El monto a pagar por el turno ingresado es de $" + aPagar)
+                montoTurno = extraDiurna(0) + extraNocturna(12)
+                alert("El monto a pagar por el turno ingresado es de $" + montoTurno)
                 alert("día sábado o festivo mas festivo al saliente")
+                alert("El monto calculado en el ejercicio anterior debería ser de $18.000")
             /* aqui resuelvo el caso 4, 5, 6, 7 y 8 */
             } else if (diaSemana == "domingo" || diaSemana == "viernes" || (festivo == "si" && festivoSiguiente == "no") || ((diaSemana == "lunes" || diaSemana == "martes" || diaSemana == "miercoles" || diaSemana == "jueves") && (festivo == "no" && festivoSiguiente == "si"))) {
                 montoTotal += (extraDiurna(1) + extraNocturna(11))
-                alert("El monto a pagar por el turno ingresado es de $" + aPagar)
+                montoTurno = extraDiurna(1) + extraNocturna(11)
+                alert("El monto a pagar por el turno ingresado es de $" + montoTurno)
                 alert("noche domingo o de viernes o de habil con feriado al dia siguiente o lunes a jueves con festivo al día siguiente")
+                alert("El monto calculado en el ejercicio anterior debería ser de $17.750")
             /* aqui resuelvo el caso 9 */
             } else if ((diaSemana == "lunes" || diaSemana == "martes" || diaSemana == "miercoles" || diaSemana == "jueves") && (festivo == "no" && festivoSiguiente == "no")){
                 montoTotal += (extraDiurna(2) + extraNocturna(10))
-                alert("El monto a pagar por el turno ingresado es de $" + aPagar)
+                montoTurno = extraDiurna(2) + extraNocturna(10)
+                alert("El monto a pagar por el turno ingresado es de $" + montoTurno)
                 alert("lunes a jueves habil")
+                alert("El monto calculado en el ejercicio anterior debería ser de $17.500")
             } else {
                 alert("Los datos ingresados son erróneos, vuelva a intentar")
             }
