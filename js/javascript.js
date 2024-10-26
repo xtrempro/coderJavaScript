@@ -1,52 +1,99 @@
 /* Declaro el valor de una hora normal */
-const valorHoraNormal = 1000
+const valorGrado = {
+    15: 1000,
+    14: 1200,
+    13: 1400,
+    12: 1600,
+    11: 1800,
+};
+
 /* variable de cuanto se debe pagar por horas extras */
 let aPagar = 0
 let montoTotal = 0
 let montoTurno = 0
-/* variable de si el turno es de día o de noche */
-let tipoTurno = prompt("escriba 'dia' o 'noche' de acuerdo al horario en el que realizó el turno extra").toLowerCase()
-let festivo
-let diaSemana
-let festivoSiguiente
+let grado 
 
+//días del mes
+const dias = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+//días inhábiles del mes
+let inhabiles = [5,6,12,13,19,20,26,27];
+
+//función que calcula el monto de las horas extras nocturnas
 function extraNocturna(numero) {
-    aPagar = (valorHoraNormal * 1.5 * numero) 
+    aPagar = (valorGrado[grado] * 1.5 * numero) 
     return aPagar
 }
 
+// función que calcula el monto de las horas extras diurnas
 function extraDiurna(numero) {
-    aPagar = (valorHoraNormal * 1.25 * numero) 
+    aPagar = (valorGrado[grado] * 1.25 * numero) 
     return aPagar
+}
+// ingrese el grado de la escala de su remuneración
+
+function diaSiguienteFeriado (inhabiles, valor) {
+    for(let i=0; i < inhabiles.length; i++){
+        if(inhabiles[i] === valor){
+            if(i<inhabiles.length - 1) {
+                if (inhabiles[i+1] === valor+1){
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
 }
 
 
-while (tipoTurno !== "listo") {
+
+while (grado!== 11 && grado !== 12 && grado !== 13 && grado !== 14 && grado !== 15) {
+  grado = parseInt(prompt("Ingrese el grado en el que se encuentra (11, 12, 13, 14 o 15):"));
+} 
+
+// aquí se ingresa el día del mes en que se realiza el turno
+let valor = parseInt(prompt("Ingrese el número del día del mes en que realizó el turno:"))
+// aquí se busca si el valor ingresado está dentro del array del mes
+const indice = dias.indexOf(valor);
+// aquí se busca si el valor ingresado corresponde a un día inhábil
+const indiceInhabil = inhabiles.indexOf(valor);
+// si el valor ingresado no está en el array muestra mensaje de error, si existe entonces avanza a los cálculos
+
+// siempre que el día ingresado sea distinto de "0" debe aplicar el bucle
+while (valor !== 0) {
+    if (inhabiles.includes(valor)) {
+        alert("el dia es feriado")
+    }
+    // si el valor ingresado no está dentro del array entonces da una alerta de que el dato no existe
+    if (indice === -1) {
+    alert("el día ingresado no existe")
+    }else{
+    //si el día existe, entonces consulta si el turno fue de día o de noche
+    let tipoTurno = parseInt(prompt("escriba '1' si el turno fue de día o '2' si el turno fue de noche"))
+    //hacemos un switch para analizar por separado el turno de día y el turno de noche
     switch(tipoTurno){
-        /* para el turno de día hay 2 opciones:
+        /*
+        el caso 1 es el turno de día en donde hay 2 opciones:
             1.- día sábado o domingo o festivo: se considera valor hora extra nocturna
             2.- día de lunes a viernes: se considera valor hora extra diurna
-            */
-        case "dia":
-            diaSemana=prompt("Escriba el día de la semana en que hizo el turno; ejemplo: 'lunes', 'martes', 'miercoles', etc.").toLowerCase()
-            festivo=prompt("Escriba 'si' en el caso que ese día haya sido festivo. Escriba 'no' en el caso que ese día no haya sido festivo").toLowerCase()
-            if (festivo == "si" || diaSemana == "sabado" || diaSemana == "domingo"){
-                montoTotal += extraNocturna(12)
-                montoTurno = extraNocturna(12)
-                alert("El monto a pagar por el turno ingresado es de $" + montoTurno)
-                alert("El monto calculado en el ejercicio anterior debería ser de $18.000")
-            } else if (festivo == "no"){
+        */
+        case 1:
+            if (inhabiles.includes(valor) === false) {
                 montoTotal += extraDiurna(12)
                 montoTurno = extraDiurna(12) + extraNocturna(0)
                 alert("El monto a pagar por el turno ingresado es de $" + montoTurno)
                 alert("El monto calculado en el ejercicio anterior debería ser de $15.000")
-            } else {
-                alert("Los datos ingresados son erróneos, vuelva a intentar")
-            }
-            tipoTurno = prompt("escriba 'dia' o 'noche' de acuerdo al horario en el que realizó el siguiente turno extra. Si ya agregó todos sus turnos extras, entonces escriba 'listo' para ver el total").toLowerCase()
-            break
-
-        /* para el turno de noche hay 9 opciones:
+                }else if (inhabiles.includes(valor) === true){
+                montoTotal += extraNocturna(12)
+                montoTurno = extraNocturna(12)
+                alert("El monto a pagar por el turno ingresado es de $" + montoTurno)
+                alert("El monto calculado en el ejercicio anterior debería ser de $18.000")
+                }else{
+                    alert("1.- Los datos ingresados son erróneos, vuelva a intentar") 
+                }
+                valor = parseInt(prompt("Ingrese el número del día del mes en que realizó el turno. Si ya agregó todos sus turnos extras, entonces escriba '0' para ver el total"))
+                break
+            /*
+            Para el turno de noche hay 9 opciones
             1.- noche del sábado: se consideran 12 HHEE nocturnas ($18.000 cuando el valor de hora es de $1000)
             2.- noche del domingo con feriado al día siguiente: se consideran 12 HHEE nocturnas
             3.- noche del viernes cuando es festivo: se consideran 12 HHEE nocturnas (listo)
@@ -56,59 +103,49 @@ while (tipoTurno !== "listo") {
             7.- noche de un lunes a jueves y día siguiente festivo: se consideran 11 HHEE nocturnas y 1 HHEE diurna
             8.- noche del viernes si no es festivo: se consideran 11 HHEE nocturnas y 1 HHEE diurna
             9.- noche de lunes a jueves: se consideran 10 HHEE nocturnas y 2 HHEE diurnas (cuando no hay festivos)
-            */  
-             
-        case "noche":
-            diaSemana=prompt("Escriba el día de la semana en que hizo el turno; ejemplo: 'lunes', 'martes', 'miercoles', etc.").toLowerCase()
-            festivo=prompt("Escriba 'si' en el caso que ese día haya sido festivo. Escriba 'no' en el caso que ese día no haya sido festivo").toLowerCase()
-            festivoSiguiente=prompt("Escriba 'si' en el caso el día siguiente a su turno de noche haya sido festivo. Escriba 'no' en el caso que el día siguiente a su turno de noche no haya sido festivo").toLowerCase()
-            /* aqui resuelvo el caso 1, 2 y 3*/
-            if (diaSemana == "sabado" || (festivo == "si" && festivoSiguiente == "si") || (festivo == "si" && diaSemana == "viernes") || (festivoSiguiente == "si" && diaSemana == "domingo")){
-                montoTotal += extraNocturna(12)
-                montoTurno = extraDiurna(0) + extraNocturna(12)
-                alert("El monto a pagar por el turno ingresado es de $" + montoTurno)
-                alert("día sábado o festivo mas festivo al saliente")
-                alert("El monto calculado en el ejercicio anterior debería ser de $18.000")
-            /* aqui resuelvo el caso 4, 5, 6, 7 y 8 */
-            } else if (diaSemana == "domingo" || diaSemana == "viernes" || (festivo == "si" && festivoSiguiente == "no") || ((diaSemana == "lunes" || diaSemana == "martes" || diaSemana == "miercoles" || diaSemana == "jueves") && (festivo == "no" && festivoSiguiente == "si"))) {
-                montoTotal += (extraDiurna(1) + extraNocturna(11))
-                montoTurno = extraDiurna(1) + extraNocturna(11)
-                alert("El monto a pagar por el turno ingresado es de $" + montoTurno)
-                alert("noche domingo o de viernes o de habil con feriado al dia siguiente o lunes a jueves con festivo al día siguiente")
-                alert("El monto calculado en el ejercicio anterior debería ser de $17.750")
-            /* aqui resuelvo el caso 9 */
-            } else if ((diaSemana == "lunes" || diaSemana == "martes" || diaSemana == "miercoles" || diaSemana == "jueves") && (festivo == "no" && festivoSiguiente == "no")){
-                montoTotal += (extraDiurna(2) + extraNocturna(10))
-                montoTurno = extraDiurna(2) + extraNocturna(10)
-                alert("El monto a pagar por el turno ingresado es de $" + montoTurno)
-                alert("lunes a jueves habil")
-                alert("El monto calculado en el ejercicio anterior debería ser de $17.500")
-            } else {
-                alert("Los datos ingresados son erróneos, vuelva a intentar")
+            */
+        case 2:
+            //en la primera parte del if se resuelve el caso 1, 2, 3 y 4
+            if (inhabiles.includes(valor)===true) {
+ 
+                    if (diaSiguienteFeriado(inhabiles,valor)===true) {
+                        montoTotal += extraNocturna(12)
+                        montoTurno = extraDiurna(0) + extraNocturna(12)
+                        alert("El monto a pagar por el turno ingresado es de $" + montoTurno)
+                        alert("El monto calculado en el ejercicio anterior debería ser de $18.000")
+                        }else if (diaSiguienteFeriado(inhabiles,valor)===false){
+                            montoTotal += (extraDiurna(1) + extraNocturna(11))
+                            montoTurno = extraDiurna(1) + extraNocturna(11)
+                            alert("El monto a pagar por el turno ingresado es de $" + montoTurno)
+                            alert("El monto calculado en el ejercicio anterior debería ser de $17.750")
+                        }
             }
-            tipoTurno = prompt("escriba 'dia' o 'noche' de acuerdo al horario en el que realizó el siguiente turno extra. Si ya agregó todos sus turnos extras, entonces escriba 'listo' para ver el total").toLowerCase()
+
+            
+
+            if (inhabiles.includes(valor)===false) {
+                    if (diaSiguienteFeriado(inhabiles,valor)===true){
+                        montoTotal += (extraDiurna(1) + extraNocturna(11))
+                        montoTurno = extraDiurna(1) + extraNocturna(11)
+                        alert("El monto a pagar por el turno ingresado es de $" + montoTurno)
+                        alert("El monto calculado en el ejercicio anterior debería ser de $17.750")
+                    }else if (diaSiguienteFeriado(inhabiles,valor)===false) {
+                        montoTotal += (extraDiurna(2) + extraNocturna(10))
+                        montoTurno = extraDiurna(2) + extraNocturna(10)
+                        alert("El monto a pagar por el turno ingresado es de $" + montoTurno)
+                        alert("El monto calculado en el ejercicio anterior debería ser de $17.500")
+                        // cuando es viernes, osea habil el viernes e inhabil el sábado
+                    }
+            }
+                
+            valor = parseInt(prompt("Ingrese el número del día del mes en que realizó el turno. Si ya agregó todos sus turnos extras, entonces escriba '0' para ver el total"))
             break
-        default:
-            alert("Datos mal Ingresados")
-            break
-    } 
+            default:
+            alert("Datos mal Ingresados")   
+            valor = parseInt(prompt("Ingrese el número del día del mes en que realizó el turno. Si ya agregó todos sus turnos extras, entonces escriba '0' para ver el total"))         
+    }
+}
+
 }
 
 alert("El monto total a pagar por horas extraordinarias es de $"+montoTotal)
-
-/* ingrese si al día anterior o siguiente al turno fue festivo
-
-crear
-un switch para saber si es dia o noche
-luego vienen if 
-
-cuando es día
-if ((lunes a viernes)||| sabado ||| domingo) &&& festivo 
-funcion (12) horas150
- else if
- (lunes a viernes) &&& habil
-funcion (12) horas125
- else
- datos mal ingresados
-
- */
