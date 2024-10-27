@@ -44,6 +44,16 @@ function diaSiguienteFeriado (inhabiles, valor) {
     return false;
 }
 
+function encontrarInhabilSiguiente (inhabiles,valor){
+    const feriadoSiguiente = valor + 1;
+    for (let i=0; i<inhabiles.length;i++){
+        if(inhabiles[i]===feriadoSiguiente){
+            return true
+        }
+    }
+    return false
+}
+
 
 
 while (grado!== 11 && grado !== 12 && grado !== 13 && grado !== 14 && grado !== 15) {
@@ -60,14 +70,7 @@ const indiceInhabil = inhabiles.indexOf(valor);
 
 // siempre que el día ingresado sea distinto de "0" debe aplicar el bucle
 while (valor !== 0) {
-    if (inhabiles.includes(valor)) {
-        alert("el dia es feriado")
-    }
-    // si el valor ingresado no está dentro del array entonces da una alerta de que el dato no existe
-    if (indice === -1) {
-    alert("el día ingresado no existe")
-    }else{
-    //si el día existe, entonces consulta si el turno fue de día o de noche
+//consulta si el turno fue de día o de noche
     let tipoTurno = parseInt(prompt("escriba '1' si el turno fue de día o '2' si el turno fue de noche"))
     //hacemos un switch para analizar por separado el turno de día y el turno de noche
     switch(tipoTurno){
@@ -81,12 +84,10 @@ while (valor !== 0) {
                 montoTotal += extraDiurna(12)
                 montoTurno = extraDiurna(12) + extraNocturna(0)
                 alert("El monto a pagar por el turno ingresado es de $" + montoTurno)
-                alert("El monto calculado en el ejercicio anterior debería ser de $15.000")
                 }else if (inhabiles.includes(valor) === true){
                 montoTotal += extraNocturna(12)
                 montoTurno = extraNocturna(12)
                 alert("El monto a pagar por el turno ingresado es de $" + montoTurno)
-                alert("El monto calculado en el ejercicio anterior debería ser de $18.000")
                 }else{
                     alert("1.- Los datos ingresados son erróneos, vuelva a intentar") 
                 }
@@ -108,7 +109,7 @@ while (valor !== 0) {
             //en la primera parte del if se resuelve el caso 1, 2, 3 y 4
             if (inhabiles.includes(valor)===true) {
  
-                    if (diaSiguienteFeriado(inhabiles,valor)===true) {
+                    if (encontrarInhabilSiguiente(inhabiles,valor)===true) {
                         montoTotal += extraNocturna(12)
                         montoTurno = extraDiurna(0) + extraNocturna(12)
                         alert("El monto a pagar por el turno ingresado es de $" + montoTurno)
@@ -117,24 +118,21 @@ while (valor !== 0) {
                             montoTotal += (extraDiurna(1) + extraNocturna(11))
                             montoTurno = extraDiurna(1) + extraNocturna(11)
                             alert("El monto a pagar por el turno ingresado es de $" + montoTurno)
-                            alert("El monto calculado en el ejercicio anterior debería ser de $17.750")
                         }
             }
 
             
 
             if (inhabiles.includes(valor)===false) {
-                    if (diaSiguienteFeriado(inhabiles,valor)===true){
+                    // cuando es viernes, osea habil el viernes e inhabil el sábado
+                    if (encontrarInhabilSiguiente(inhabiles,valor)===true){
                         montoTotal += (extraDiurna(1) + extraNocturna(11))
                         montoTurno = extraDiurna(1) + extraNocturna(11)
                         alert("El monto a pagar por el turno ingresado es de $" + montoTurno)
-                        alert("El monto calculado en el ejercicio anterior debería ser de $17.750")
-                    }else if (diaSiguienteFeriado(inhabiles,valor)===false) {
+                    }else if (encontrarInhabilSiguiente(inhabiles,valor)===false) {
                         montoTotal += (extraDiurna(2) + extraNocturna(10))
                         montoTurno = extraDiurna(2) + extraNocturna(10)
                         alert("El monto a pagar por el turno ingresado es de $" + montoTurno)
-                        alert("El monto calculado en el ejercicio anterior debería ser de $17.500")
-                        // cuando es viernes, osea habil el viernes e inhabil el sábado
                     }
             }
                 
@@ -144,8 +142,6 @@ while (valor !== 0) {
             alert("Datos mal Ingresados")   
             valor = parseInt(prompt("Ingrese el número del día del mes en que realizó el turno. Si ya agregó todos sus turnos extras, entonces escriba '0' para ver el total"))         
     }
-}
-
 }
 
 alert("El monto total a pagar por horas extraordinarias es de $"+montoTotal)
