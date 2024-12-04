@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.calendario {
+    text-align: center;
+}
+
+.dias, .fechas {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.dias div, .fechas div {
+    border: 1px solid #ccc;
+    padding: 10px;
+    height: 55px;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.dias div {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+
+.turnoDia {
+    background-color: rgb(45, 181, 3);
+    color: white;
+}
+
+.turnoNoche {
+    background-color: rgb(14, 12, 92);
+    color: white;
+}
+
+.sinTurno {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+
+
+#b1, #b2, #b3, #b4, #b5, #b6, #b7, #b8, #b9, #b10, #b11, #b12, #b13, #b14, #b15, #b16, #b17, #b18, #b19, #b20, #b21, #b22, #b23, #b24, #b25, #b26, #b27, #b28, #b29, #b30, #b31, #b32, #b33, #b34, #b35, #b36, #b37 {
+    display: flex;
+    flex-direction: column;   /* Los <p> se apilan verticalmente */
+    align-items: center;      /* Centra los párrafos horizontalmente */
+    text-align: center;       /* Asegura que el texto dentro de los párrafos esté centrado */
+    line-height: 0px;
+}
+
+

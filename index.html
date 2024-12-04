@@ -1,49 +1,179 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Horas Extras</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>Calendario Diciembre 2024</title>
 </head>
 <body>
-    <header>
-        <h1>Primera Entrega JavaScprit CoderHouse</h1>
-    </header>
-    <main>
-        <h2>Calculadora de horas extraordinarias</h2>
-        <h3>En mi trabajo existen turno de día y turnos de noche. Cuando uno realiza un turno extra, las horas realizadas se pagan según el siguiente horario:</h3>
-        <ul>
-            <li>07:00 a 21:00 = Horas extras pagadas al 125%</li>
-            <li>21:00 a 07:00 = Horas extras pagadas al 150%</li>
-            <li>Días festivos y fines de semana = Horas extras pagadas al 150%</li>
-        </ul>
-        <p>Los turnos de día son de 08:00 a 20:00 horas, mientras que los turnos de noche son de 20:00 a 08:00 horas.</p>
-        <h3>En mi trabajo son alrededor de 1200 colaboradores, por lo que generalmente se producen errores al calcular las horas extraordinarias de cada trabajador</h3>
-        <p>Mi intención es poder desarrollar una <span>calculadora de horas extraordinarias</span> que sirva para cotejar que el dinero recibido en la remuneración se corresponda con las horas efectivamente realizadas.</p>
-        <h3>Para los turnos de día se dan las siguientes 2 situaciones:</h3>
-        <ol>
-            <li>días sábado, domingo o festivo: se consideran <span>12 HHEE nocturnas</span></li>
-            <li>días de lunes a viernes: se consideran <span>12 HHEE diurnas</span></li>
-        </ol>
-        <h3>Para los turnos de noche se dan las siguientes 8 situaciones:</h3>
-        <ol>
-            <li>noche del sábado: se consideran <span>12 HHEE nocturnas</span></li>
-            <li>noche del viernes cuando es festivo: se consideran <span>12 HHEE nocturnas</span></li>
-            <li>noche de un festivo y día siguiente también festivo: se consideran <span>12 HHEE nocturnas</span></li>
-            <li>noche de un festivo y día siguiente hábil: se consideran <span>11 HHEE nocturnas y 1 HHEE diurna</span></li>
-            <li>noche de un domingo y día siguiente hábil: se consideran <span>11 HHEE nocturnas y 1 HHEE diurna</span></li>
-            <li>noche de un lunes a jueves y día siguiente festivo: se consideran <span>11 HHEE nocturnas y 1 HHEE diurna</span></li>
-            <li>noche del viernes si no es festivo: se consideran <span>11 HHEE nocturnas y 1 HHEE diurna</span></li>
-            <li>noche de lunes a jueves: se consideran <span>10 HHEE nocturnas y 2 HHEE diurnas</span>(cuando no hay festivos)</li>
-        </ol>
-
-        <h4>En esta primera entrega, presento un código bastante sencillo, sin embargo, mi objetivo es poder complejizarlo con algunas variables que aún hacen falta, además de robustecer el código para que el proyecto final adquiera una utilidad real automatizando gran parte del proceso</h4>
-
-        <p>Pd. El valor hora cambia según la remuneración asignada para cada persona</p>
-    </main>
-    <footer>
-        <p>Alan Plaza Martínez</p>
-    </footer>
-    <script src="./js/javascript.js"></script>
+    <div class="calendario">
+        <h2>Calendario Diciembre 2024</h2>
+        <div class="dias">
+            <div>Lunes</div>
+            <div>Martes</div>
+            <div>Miércoles</div>
+            <div>Jueves</div>
+            <div>Viernes</div>
+            <div>Sábado</div>
+            <div>Domingo</div>
+        </div>
+        <div class="fechas">
+            <div id="b1">
+                <p id="casilleroB1"></p>
+                <p id="turnoB1"></p>
+            </div>
+            <div id="b2">
+                <p id="casilleroB2"></p>
+                <p id="turnoB2"></p>
+            </div>
+            <div id="b3">
+                <p id="casilleroB3"></p>
+                <p id="turnoB3"></p>
+            </div>
+            <div id="b4">
+                <p id="casilleroB4"></p>
+                <p id="turnoB4"></p>
+            </div>
+            <div id="b5">
+                <p id="casilleroB5"></p>
+                <p id="turnoB5"></p>
+            </div>
+            <div id="b6">
+                <p id="casilleroB6"></p>
+                <p id="turnoB6"></p>
+            </div>
+            <div id="b7">
+                <p id="casilleroB7">1</p>
+                <p id="turnoB7"></p>
+            </div>
+            <div id="b8">
+                <p id="casilleroB8">2</p>
+                <p id="turnoB8"></p>
+            </div>
+            <div id="b9">
+                <p id="casilleroB9">3</p>
+                <p id="turnoB9"></p>
+            </div>
+            <div id="b10">
+                <p id="casilleroB10">4</p>
+                <p id="turnoB10"></p>
+            </div>
+            <div id="b11">
+                <p id="casilleroB11">5</p>
+                <p id="turnoB11"></p>
+            </div>
+            <div id="b12">
+                <p id="casilleroB12">6</p>
+                <p id="turnoB12"></p>
+            </div>
+            <div id="b13">
+                <p id="casilleroB13">7</p>
+                <p id="turnoB13"></p>
+            </div>
+            <div id="b14">
+                <p id="casilleroB14">8</p>
+                <p id="turnoB14"></p>
+            </div>
+            <div id="b15">
+                <p id="casilleroB15">9</p>
+                <p id="turnoB15"></p>
+            </div>
+            <div id="b16">
+                <p id="casilleroB16">10</p>
+                <p id="turnoB16"></p>
+            </div>
+            <div id="b17">
+                <p id="casilleroB17">11</p>
+                <p id="turnoB17"></p>
+            </div>
+            <div id="b18">
+                <p id="casilleroB18">12</p>
+                <p id="turnoB18"></p>
+            </div>
+            <div id="b19">
+                <p id="casilleroB19">13</p>
+                <p id="turnoB19"></p>
+            </div>
+            <div id="b20">
+                <p id="casilleroB20">14</p>
+                <p id="turnoB20"></p>
+            </div>
+            <div id="b21">
+                <p id="casilleroB21">15</p>
+                <p id="turnoB21"></p>
+            </div>
+            <div id="b22">
+                <p id="casilleroB22">16</p>
+                <p id="turnoB22"></p>
+            </div>
+            <div id="b23">
+                <p id="casilleroB23">17</p>
+                <p id="turnoB23"></p>
+            </div>
+            <div id="b24">
+                <p id="casilleroB24">18</p>
+                <p id="turnoB24"></p>
+            </div>
+            <div id="b25">
+                <p id="casilleroB25">19</p>
+                <p id="turnoB25"></p>
+            </div>
+            <div id="b26">
+                <p id="casilleroB26">20</p>
+                <p id="turnoB26"></p>
+            </div>
+            <div id="b27">
+                <p id="casilleroB27">21</p>
+                <p id="turnoB27"></p>
+            </div>
+            <div id="b28">
+                <p id="casilleroB28">22</p>
+                <p id="turnoB28"></p>
+            </div>
+            <div id="b29">
+                <p id="casilleroB29">23</p>
+                <p id="turnoB29"></p>
+            </div>
+            <div id="b30">
+                <p id="casilleroB30">24</p>
+                <p id="turnoB30"></p>
+            </div>
+            <div id="b31">
+                <p id="casilleroB31">25</p>
+                <p id="turnoB31"></p>
+            </div>
+            <div id="b32">
+                <p id="casilleroB32">26</p>
+                <p id="turnoB32"></p>
+            </div>
+            <div id="b33">
+                <p id="casilleroB33">27</p>
+                <p id="turnoB33"></p>
+            </div>
+            <div id="b34">
+                <p id="casilleroB34">28</p>
+                <p id="turnoB34"></p>
+            </div>
+            <div id="b35">
+                <p id="casilleroB35">29</p>
+                <p id="turnoB35"></p>
+            </div>
+            <div id="b36">
+                <p id="casilleroB36">30</p>
+                <p id="turnoB36"></p>
+            </div>
+            <div id="b37">
+                <p id="casilleroB37">31</p>
+                <p id="turnoB37"></p>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h3>Cálculo de Horas Extras</h3>
+        <p id="valorTotal">Total HHEE del mes:</p>
+        <p id="valorUltimoTurno">Valor del último turno ingresado:</p>
+    </div>
+    <script src="./js/script.js"></script>
 </body>
 </html>
